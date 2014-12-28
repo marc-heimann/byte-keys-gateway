@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!--
+ * log configuration file for log4j.
+ *
+ * $Author: m.heimann $
+ *
+ * $Revision: 5189 $
+ *
+ -->
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+	<!-- A time/date based rolling appender -->
+	<appender name="FileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="log/CashupGate.log"/>
+		<param name="Append" value="true"/>
+		<!-- Rollover at midnight each day -->
+		<param name="DatePattern" value="'.'yyyy-MM-dd"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- The default pattern: Date Priority [Category] Message\n -->
+            	<param name="ConversionPattern" value="%d{ISO8601} {%20.20t} (%15.15c %5.5L%x) [%-5p] - %m%n"/>
+		</layout>
+	</appender>	
+
+	<!-- ============================== -->
+	<!-- Append messages to the console -->
+	<!-- ============================== -->
+	<appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out"/>
+		<param name="Target" value="System.out"/>
+		<layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} {%20.20t} (%15.15c %5.5L%x) [%-5p] - %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- ================ -->
+	<!-- Limit categories -->
+	<!-- ================ -->
+    
+    <category name="de">
+        <priority value="DEBUG"/>       
+    </category>    
+      
+	<!-- ======================= -->
+	<!-- Setup the Root category -->
+	<!-- ======================= -->
+
+	<root>
+        <appender-ref ref="FileAppender"/>
+        <appender-ref ref="ConsoleAppender"/>
+	</root>
+</log4j:configuration>
